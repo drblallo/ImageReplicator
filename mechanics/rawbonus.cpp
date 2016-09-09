@@ -7,6 +7,8 @@ using namespace mechanics;
 //##### Constructors and Conversions #####
 //########################################
 RawBonus::RawBonus(float val, const string* des) : value(val), description(*des), enabled(true) {}
+RawBonus::RawBonus(float val, const string des) : value(val), description(des), enabled(true) {}
+
 
 RawBonus::operator float() const
 {

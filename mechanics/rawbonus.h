@@ -17,6 +17,7 @@ namespace mechanics
         //##### Constructors and Conversions #####
         //########################################
             RawBonus(float val, const string* des);
+            RawBonus(float val, const string des);
             operator float() const;
             virtual ~RawBonus();
 
@@ -38,8 +39,8 @@ namespace mechanics
         //########################################
         //#####         Privatizing          #####
         //########################################
-            RawBonus(const RawBonus&) = delete;
             RawBonus& operator= (const RawBonus&) = delete;
+            RawBonus(const RawBonus&) = delete;
 
         private:
         //########################################

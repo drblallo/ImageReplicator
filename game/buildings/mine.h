@@ -9,7 +9,7 @@ namespace game
         public:
             Mine(QString type);
             virtual ~Mine();
-        protected:
-            Characteristic production;
+        private:
+            RawBonus production;
     };
 }

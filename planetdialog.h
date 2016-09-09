@@ -27,6 +27,7 @@ private:
     game::TeamProjectManager* manager;
     void updateDeposits();
     void updateBuildings();
+    void updateOutputs();
 
 protected:
     virtual void update();

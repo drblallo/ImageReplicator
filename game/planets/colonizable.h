@@ -17,6 +17,9 @@ namespace game
             inline const std::string* getName() const {return &name;}
             virtual vector<StockPile*> getMinable();
             vector<shared_ptr<Building> > getBuildings();
+            inline const vector<Characteristic>* getOutPuts() const {return &outputs;}
+            Characteristic* hasOutPut(string output) ;
+
             void addBuilding(shared_ptr<Building> build);
             void removeBuilding(shared_ptr<Building> build);
             void removeBuilding(int building);
@@ -31,6 +34,8 @@ namespace game
             Characteristic size;
             string name;
             vector<shared_ptr<Building> > buildings;
+            vector<Characteristic> outputs;
+            Characteristic* addOutput(string output);
 
     };
 }

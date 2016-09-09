@@ -2,7 +2,7 @@
 #include "projecttarget.h"
 
 using namespace mechanics;
-Project::Project(ProjectTarget* t, QString n) : Timer(t->getProjectTime()->calculate()), target(t), name(n)
+Project::Project(ProjectTarget* t, QString n) : Timer(t->getProjectTime()->getValue()), target(t), name(n)
 {
 
 }

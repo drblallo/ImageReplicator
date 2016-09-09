@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>507</width>
     <height>300</height>
    </rect>
   </property>
@@ -21,6 +21,34 @@
        <property name="currentIndex">
         <number>0</number>
        </property>
+       <widget class="QWidget" name="TabOutPuts">
+        <attribute name="title">
+         <string>Outputs</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QLabel" name="LabelTotalIncome">
+             <property name="text">
+              <string>Total Income</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="LabelTotalIncomeValue">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QListWidget" name="ListOutputs"/>
+         </item>
+        </layout>
+       </widget>
        <widget class="QWidget" name="TabResource">
         <attribute name="title">
          <string>Resources</string>

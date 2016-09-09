@@ -1,4 +1,5 @@
 #include "timer.h"
+#include <iostream>
 
 using namespace mechanics;
 Timer::Timer(int ttl) : Action(), tickLeft(ttl),startTickConst(ttl)
@@ -27,6 +28,7 @@ void Timer::execute()
             OnExpire();
         }catch(exception e)
         {
+            std::cerr << e.what() << "\n";
             deleteMe = true;
         }
     }

@@ -14,13 +14,15 @@ namespace mechanics
         //##### Constructors and Conversions #####
         //########################################
             Characteristic(float base, string nm);
+            Characteristic(const Characteristic&);
+            Characteristic(const Characteristic*);
+            Characteristic& operator= (const Characteristic&);
             operator float() const;
             ~Characteristic();
 
         //########################################
         //#####           Methods            #####
         //########################################
-            float calculate();
             void addRawBonus(RawBonus* bonus);
             void addMultiplierBonus(RawBonus* bonus);
             void removeRawBonuss(RawBonus *bonus);
@@ -36,14 +38,11 @@ namespace mechanics
             const vector<RawBonus*>* getRawBonuses() const;
             const vector<RawBonus*>* getMultiplierBonuses() const;
             const string* getName() const;
+            inline float getValue() const {return chached;}
 
-        //########################################
-        //#####         Privatizing          #####
-        //########################################
-            Characteristic(const Characteristic&) = delete;
-            Characteristic& operator= ( const Characteristic&) = delete;
 
         private:
+            float calculate();
         //########################################
         //#####           Fields             #####
         //########################################

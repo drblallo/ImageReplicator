@@ -19,6 +19,26 @@ void PlanetDialog::update()
 {
     updateDeposits();
     updateBuildings();
+    updateOutputs();
+}
+
+void PlanetDialog::updateOutputs()
+{
+    int s(ui->ListOutputs->currentRow());
+
+    ui->ListOutputs->clear();
+    const vector<Characteristic>* resoruces(colonizable->getOutPuts());
+    for (unsigned int a = 0; a < resoruces->size(); a++)
+    {
+        QString str(QString::fromStdString(*resoruces->at(a).getName()));
+        str.append("\t");
+        str += QString::number(resoruces->at(a).getValue());
+
+        new QListWidgetItem(str, ui->ListOutputs);
+
+    }
+
+    ui->ListOutputs->setCurrentRow(s);
 }
 
 void PlanetDialog::updateDeposits()
@@ -49,8 +69,7 @@ void PlanetDialog::updateBuildings()
 
     for (unsigned int a = 0; a < resoruces.size(); a++)
     {
-        QString str(*resoruces[a]->getName());
-
+        QString str(resoruces[a]->getDescription());
         new QListWidgetItem(str, ui->ListStructures);
     }
 
