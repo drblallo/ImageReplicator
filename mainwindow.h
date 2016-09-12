@@ -34,6 +34,8 @@ private:
 
 protected:
     virtual void update();
+private slots:
+    void on_MoneyButton_clicked();
 };
 
 #endif // MAINWINDOW_H

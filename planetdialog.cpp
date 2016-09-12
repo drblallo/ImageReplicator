@@ -5,11 +5,12 @@
 #include "game/actions/buildmineaction.h"
 
 using namespace game;
-PlanetDialog::PlanetDialog(game::Colonizable* col, TeamProjectManager* man, QWidget *parent) :
+PlanetDialog::PlanetDialog(game::Colonizable* col, TeamProjectManager* man, GameModule* m, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PlanetDialog),
     colonizable(col),
-    manager(man)
+    manager(man),
+    module(m)
 {
     ui->setupUi(this);
     update();
@@ -39,6 +40,7 @@ void PlanetDialog::updateOutputs()
     }
 
     ui->ListOutputs->setCurrentRow(s);
+
 }
 
 void PlanetDialog::updateDeposits()
@@ -58,6 +60,24 @@ void PlanetDialog::updateDeposits()
     }
 
     ui->ListDeposits->setCurrentRow(s);
+
+    s = ui->BuildMineComboBox->currentIndex();
+    ui->BuildMineComboBox->clear();
+
+    for (unsigned int a = 0; a < module->getTeams()->size(); a++)
+    {
+
+        ui->BuildMineComboBox->addItem(
+                    QString::number(module->getTeams()->at(a).getSkillLevel())
+                    + "-" +
+                    module->getTeams()->at(a).getTypeName()
+                    + " "
+                    + *module->getTeams()->at(a).getName()
+                    );
+    }
+
+
+    ui->BuildMineComboBox->setCurrentIndex(s);
 }
 
 void PlanetDialog::updateBuildings()
@@ -83,6 +103,16 @@ PlanetDialog::~PlanetDialog()
 
 void PlanetDialog::on_ButtonBuildMine_clicked()
 {
-     new BuildMineAction(colonizable, ui->ListDeposits->currentRow(), "Project Build Mine", manager);
+    if (ui->BuildMineComboBox->currentIndex() >= 0)
+    {
+        new BuildMineAction
+                (
+                    colonizable,
+                    ui->ListDeposits->currentRow(),
+                    "Project Build Mine",
+                    module,
+                    module->getTeam(ui->BuildMineComboBox->currentIndex())
+                );
+    }
    // m->getProject()->call();
 }

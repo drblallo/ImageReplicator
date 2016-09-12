@@ -4,9 +4,10 @@
 #include "mechanics/stockpile.h"
 #include "game/buildings/mine.h"
 
+
 using namespace game;
-BuildMineAction::BuildMineAction(Colonizable* p, int target, QString name, TeamProjectManager* man) :
-    TeamProject(10, 10, name, man),
+BuildMineAction::BuildMineAction(Colonizable* p, int target, QString name, GameModule* m, AccademiaTeam t) :
+    TeamProject(10, 10, name, m, t),
     targetPlanet(p),
     targetMinable(target)
 {

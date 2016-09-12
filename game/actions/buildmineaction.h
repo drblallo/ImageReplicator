@@ -8,7 +8,12 @@ namespace game
     class BuildMineAction : public TeamProject
     {
         public:
-            BuildMineAction(Colonizable* planet, int target, QString name, TeamProjectManager *man);
+            BuildMineAction(
+                    Colonizable* planet,
+                    int target,
+                    QString name,
+                    GameModule* module,
+                    AccademiaTeam team);
 
 
         protected:

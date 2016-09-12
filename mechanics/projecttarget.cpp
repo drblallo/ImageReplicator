@@ -21,3 +21,4 @@ QString ProjectTarget::getDescriptiveName() const
 
     return n;
 }
+

@@ -36,5 +36,5 @@ void Timer::execute()
 
 void Timer::OnTick()
 {
-
+    std::cerr << "called\n";
 }

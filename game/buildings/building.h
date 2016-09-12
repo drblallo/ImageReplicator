@@ -17,7 +17,7 @@ namespace game
         Building(const QString* n, int maxLevel);
         virtual ~Building();
         inline QString* getName(){return &name;}
-        inline int getLevel(){return currentLevel;}
+        inline int getLevel() const {return currentLevel;}
         inline int getMaxLevel(){return maxUpgrade;}
         inline vector<RawBonus*>* getRawModifiers() {return &rawOutputs;}
         inline vector<RawBonus*>* getPercentModifiers() {return &percentOutputs;}

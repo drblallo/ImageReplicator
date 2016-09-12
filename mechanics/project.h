@@ -36,6 +36,7 @@ namespace mechanics
         //#####           Methods            #####
         //########################################
             virtual void OnExpire();
+            virtual void OnTick();
 
         private:
             Project(ProjectTarget* target, QString n);

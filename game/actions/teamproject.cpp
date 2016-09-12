@@ -1,20 +1,22 @@
 #include "teamproject.h"
 #include <iostream>
 #include "teamprojectmanager.h"
+#include "game/gamemodule.h"
 
 using namespace game;
-TeamProject::TeamProject(int projectTime, int operationTime, QString n, TeamProjectManager* manag) :
+TeamProject::TeamProject(int projectTime, int operationTime, QString n, GameModule* m, AccademiaTeam t) :
     Timer(operationTime),
     GameProject(projectTime, n),
-    manager(manag)
+    team(t),
+    module(m)
 {
-    if (!manag)
+    if (!module)
     {
         deleteMe = true;
         Action::uncall(project);
         return;
     }
-    if (manager->addProject(this))
+    if (module->getProjectManager()->addProject(this))
     {
         Action::call(project);
     }
@@ -27,24 +29,24 @@ TeamProject::TeamProject(int projectTime, int operationTime, QString n, TeamProj
 
 TeamProject::~TeamProject()
 {
-    manager->removeOperation(this);
+    module->getProjectManager()->removeOperation(this);
     if (project)
     {
         Action::uncall(project);
-        manager->removeProject(project);
+        module->getProjectManager()->removeProject(project);
     }
 }
 
 void TeamProject::onProjectCanceled()
 {
     Action::uncall(this);
-    manager->removeProject(project);
+    module->getProjectManager()->removeProject(project);
 }
 
 void TeamProject::OnProjectFinished()
 {
     std::cerr << name.toStdString() << " created \n";
-    manager->removeProject(project);
+    module->getProjectManager()->removeProject(project);
     Action::call(this);
     deleteMe = false;
 }
@@ -62,4 +64,13 @@ QString TeamProject::getDescriptiveName() const
    s += QString::number(getTimeToLive());
    s += " Days";
     return s;
+}
+
+void TeamProject::OnProjectStart()
+{
+    int index(module->getIndexOfTeam(team));
+    if (index >= 0)
+    {
+        module->removeTeam(index);
+    }
 }

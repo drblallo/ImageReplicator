@@ -56,7 +56,8 @@ void MechanicsEngine::tick()
     std::lock_guard<std::mutex> t(engineMutex);
     clearUnused();
     for (unsigned int a = 0; a < modules.size(); a++)
-        modules[a]->tick();
+        if (!modules[a]->blocked)
+            modules[a]->tick();
     Action::resolveAllPending();
 }
 

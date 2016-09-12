@@ -6,6 +6,9 @@
 #include "game/actions/teamproject.h"
 #include "game/planets/colonizable.h"
 #include "game/ui/colonizablelistwidgetitem.h"
+#include "corpinfo.h"
+
+#include "game/accademia/accademia.h"
 
 MainWindow* MainWindow::mainWindow(NULL);
 using namespace game;
@@ -29,6 +32,8 @@ void MainWindow::startUI()
 {
     uimodule =  new UIModule(module, this);
     module->generatePlanet();
+    module->getHolding(0)->addBuilding(std::shared_ptr<Accademia>(new Accademia(module->getAccademiaGroup())));
+    module->setBlocked(false);
 
 }
 
@@ -47,7 +52,7 @@ bool MainWindow::eventFilter(QObject *, QEvent *e)
 
 void MainWindow::update()
 {
-
+    ui->MoneyButton->setText(QString::number(module->getMoney()));
     int t(ui->Holdings->currentRow());
     ui->Holdings->clear();
     TeamProject* project(module->getProjectManager()->getMostAdvancedProject());
@@ -69,7 +74,8 @@ void MainWindow::update()
                     QString::fromStdString(*module->getHolding(a)->getName()),
                     module->getHolding(a),
                     ui->Holdings,
-                    module->getProjectManager());
+                    module->getProjectManager(),
+                    module);
     }
 
     ui->Holdings->setCurrentRow(t);
@@ -83,4 +89,14 @@ void MainWindow::openProjectMenu()
     ProjectMenu p(module);
     p.setModal(true);
     p.exec();
+}
+
+void MainWindow::on_MoneyButton_clicked()
+{
+    if (!module)
+        return;
+    CorpInfo p(module);
+    p.setModal(true);
+    p.exec();
+
 }

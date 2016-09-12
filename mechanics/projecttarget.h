@@ -43,5 +43,6 @@ namespace mechanics
         //########################################
             virtual void OnProjectComplete() = 0;
             virtual void onProjectCanceled() = 0;
+            virtual void OnProjectStart() = 0;
     };
 }

@@ -81,7 +81,13 @@ SOURCES += main.cpp\
     projectmenu.cpp \
     game/ui/uiobject.cpp \
     game/actions/cancelbuildaction.cpp \
-    game/ui/colonizablelistwidgetitem.cpp
+    game/ui/colonizablelistwidgetitem.cpp \
+    game/accademia/accademia.cpp \
+    game/accademia/accademiagroups.cpp \
+    game/accademia/accademiateam.cpp \
+    corpinfo.cpp \
+    game/actions/buyteamaction.cpp \
+    game/actions/fireteamaction.cpp
 
 
 
@@ -165,12 +171,19 @@ HEADERS  += mainwindow.h \
     projectmenu.h \
     game/ui/uiobject.h \
     game/actions/cancelbuildaction.h \
-    game/ui/colonizablelistwidgetitem.h
+    game/ui/colonizablelistwidgetitem.h \
+    game/accademia/accademia.h \
+    game/accademia/accademiagroups.h \
+    game/accademia/accademiateam.h \
+    corpinfo.h \
+    game/actions/buyteamaction.h \
+    game/actions/fireteamaction.h
 
 
 FORMS    += mainwindow.ui \
     planetdialog.ui \
-    projectmenu.ui
+    projectmenu.ui \
+    corpinfo.ui
 
 RESOURCES += \
     resources.qrc

@@ -12,6 +12,8 @@ namespace mechanics
             EngineModule();
             virtual ~EngineModule();
 
+            inline void setBlocked(bool b){blocked = b;}
+
         //########################################
         //#####         Privatizing          #####
         //########################################
@@ -23,5 +25,6 @@ namespace mechanics
         //#####           Methods            #####
         //########################################
             virtual void tick() = 0;
+            bool blocked;
     };
 }
