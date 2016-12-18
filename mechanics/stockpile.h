@@ -1,30 +1,27 @@
 #pragma once
 #include "characteristic.h"
-#include <string>
+#include <QString>
+#include "informativeobject.h"
 
 namespace mechanics
 {
-    class StockPile
+    class StockPile : public InformativeObject
     {
         public:
         //########################################
         //##### Constructors and Conversions #####
         //########################################
-            StockPile(int baseValue, string n);
+            StockPile(int baseValue, QString n);
             inline operator float() const {return count;}
-
-        //########################################
-        //#####         Privatizing          #####
-        //########################################
-            StockPile(const StockPile&) = delete;
-            StockPile& operator= (const StockPile&) = delete;
 
         //########################################
         //#####          Accessors           #####
         //########################################
             inline float getValue() const {return count;}
             inline Characteristic* getIncreaseModifier(){return &addModifiers;}
-            inline const std::string* getName() const {return &name;}
+            inline Characteristic* getDecreaseModifier(){return &removeModifiers;}
+            inline virtual QString getName() const {return name;}
+            virtual QString getToolTip() const;
 
         //########################################
         //#####           Methods            #####
@@ -37,6 +34,7 @@ namespace mechanics
         //########################################
             float count;
             Characteristic addModifiers;
-            std::string name;
+            Characteristic removeModifiers;
+            QString name;
     };
 }

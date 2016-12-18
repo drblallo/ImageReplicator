@@ -1,19 +1,20 @@
 #pragma once
 #include "vector"
-#include <string>
+#include <QString>
+#include "informativeobject.h"
 
 using namespace std;
 
 namespace mechanics
 {
     class RawBonus;
-    class Characteristic
+    class Characteristic : public InformativeObject
     {
         public:
         //########################################
         //##### Constructors and Conversions #####
         //########################################
-            Characteristic(float base, string nm);
+            Characteristic(float base, QString nm);
             Characteristic(const Characteristic&);
             Characteristic(const Characteristic*);
             Characteristic& operator= (const Characteristic&);
@@ -37,7 +38,8 @@ namespace mechanics
             float getBaseValue() const;
             const vector<RawBonus*>* getRawBonuses() const;
             const vector<RawBonus*>* getMultiplierBonuses() const;
-            const string* getName() const;
+            virtual QString getName() const;
+            virtual QString getToolTip() const;
             inline float getValue() const {return chached;}
 
 
@@ -50,7 +52,7 @@ namespace mechanics
             vector<RawBonus*> multiplierExtraBonus;
             float chached;
             float baseValue;
-            string name;
+            QString name;
 
     };
 }

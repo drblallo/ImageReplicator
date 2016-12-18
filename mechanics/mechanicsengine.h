@@ -20,12 +20,18 @@ namespace mechanics
         //#####           Methods            #####
         //########################################
             static void StartEngine();
-            static inline MechanicsEngine* getEngine(){return engine;}
+            static inline MechanicsEngine* getEngine()
+            {
+                if (!engine)
+                    StartEngine();
+                return engine;
+            }
 
         private:
             void removeModule(EngineModule* module);
             void addModule(EngineModule* module);
             void clearUnused();
+
         //########################################
         //##### Constructors and Conversions #####
         //########################################

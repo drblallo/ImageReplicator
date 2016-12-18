@@ -18,90 +18,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QLabel" name="label_2">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>20</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>DC:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="MoneyButton">
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="game::HoldingsList" name="Holdings">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Box</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <property name="isWrapping" stdset="0">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
        <widget class="GLWidget" name="openGLWidget"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="ProjectName">
-        <property name="text">
-         <string>Project</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="game::ClickableProgressBar" name="ProjectProgress">
-        <property name="value">
-         <number>24</number>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>
@@ -133,16 +50,6 @@
    <class>GLWidget</class>
    <extends>QOpenGLWidget</extends>
    <header>render/glwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>game::HoldingsList</class>
-   <extends>QListWidget</extends>
-   <header>game/ui/holdingslist.h</header>
-  </customwidget>
-  <customwidget>
-   <class>game::ClickableProgressBar</class>
-   <extends>QProgressBar</extends>
-   <header>game/ui/clickableprogressbar.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

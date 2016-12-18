@@ -45,6 +45,9 @@ void Action::call(Action* act)
     if (act->pending)
         return;
 
+    if (!act->canBeCalled())
+        return;
+
     pendingActions.push_back(act);
     act->pending = true;
     act->deleteMe = true;
@@ -55,6 +58,9 @@ void Action::uncall(Action* act)
 {
     lock_guard<mutex> l(pendingActionsMutex);
     lock_guard<mutex> r(allActionsMutex);
+
+    if (!act->canBeUncalled())
+        return;
 
     if (find(allActions.begin(), allActions.end(), act) == allActions.end())
         return;
@@ -79,7 +85,11 @@ void Action::resolveAllPending()
     for (unsigned int a = 0; a < ls.size(); a++)
     {
         ls[a]->pending = false;
-        ls[a]->execute();
+        int result(ls[a]->execute());
+        for (unsigned int d = 0; d < ls[a]->callbacks.size(); d++)
+        {
+            ls[a]->callbacks[d](result);
+        }
     }
 
     for (int a = allActions.size()-1; a >= 0; a--)
@@ -91,6 +101,15 @@ void Action::resolveAllPending()
     }
 }
 
+bool Action::canBeCalled() const
+{
+    return true;
+}
+
+bool Action::canBeUncalled() const
+{
+    return true;
+}
 
 
 

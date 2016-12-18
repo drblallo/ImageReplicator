@@ -2,14 +2,10 @@
 #include <QApplication>
 #include <QSurfaceFormat>
 #include <QDesktopWidget>
-#include "game/gamescenes.h"
 #include "mechanics/mechanicsengine.h"
-#include "game/gamemodule.h"
 #include <QStyleFactory>
 #include "iostream"
-#include "game/ui/uimodule.h"
 
-using namespace game;
 int main(int argc, char *argv[])
 {
 //    QApplication::setStyle(QStyleFactory::create("Windows"));
@@ -18,7 +14,7 @@ int main(int argc, char *argv[])
       //  std::cout << QStyleFactory::keys().at(a).toLocal8Bit().constData()<< "\n";
     //}
     mechanics::MechanicsEngine::StartEngine();
-    GameModule m;
+//    GameModule m;
 
     QApplication a(argc, argv);
     QSurfaceFormat format;
@@ -33,12 +29,12 @@ int main(int argc, char *argv[])
     QSurfaceFormat::setDefaultFormat(format);
 
 
-    MainWindow w(&m);
+    MainWindow w;
     w.resize(1366, 768);
     w.show();
 
 
-    GameScenes::getScenes()->wallScene.setAsCurrent();
+  //  GameScenes::getScenes()->wallScene.setAsCurrent();
 
     return a.exec();
 }

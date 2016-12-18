@@ -12,7 +12,7 @@ Timer::~Timer()
 }
 
 
-void Timer::execute()
+int Timer::execute()
 {
     tickLeft--;
     if (tickLeft > 0)
@@ -20,18 +20,21 @@ void Timer::execute()
         OnTick();
         Action::call(this);
         deleteMe = false;
+        return 0;
     }
     if (tickLeft <= 0)
     {
         deleteMe = true;
         try{
-            OnExpire();
+            return OnExpire();
         }catch(exception e)
         {
             std::cerr << e.what() << "\n";
             deleteMe = true;
+            return -1;
         }
     }
+    return 0;
 }
 
 void Timer::OnTick()

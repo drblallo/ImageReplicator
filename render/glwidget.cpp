@@ -6,9 +6,9 @@
 #include <iostream>
 #include "input.h"
 #include <QKeyEvent>
-#include "game/gamescenes.h"
 #include <QOpenGLDebugLogger>
 #include "mainwindow.h"
+#include "render/scene.h"
 
 using namespace renderer;
 GLWidget::GLWidget(QWidget* parent) : QOpenGLWidget(parent), scene(NULL), farPlane(1000)// doOne(false), count(0)
@@ -58,7 +58,8 @@ void GLWidget::update()
       if (engineObjects[a]->isActive())
          updateQueue.push_back(engineObjects[a]);
 
-  scene->update();
+  if (scene)
+    scene->update();
 
 
   for (unsigned int a = 0; a < updateQueue.size(); a++)

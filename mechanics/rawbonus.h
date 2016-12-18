@@ -1,6 +1,7 @@
 #pragma once
-#include <string>
+#include <QString>
 #include <vector>
+#include "informativeobject.h"
 
 
 using namespace std;
@@ -8,7 +9,7 @@ using namespace std;
 namespace mechanics
 {
     class Characteristic;
-    class RawBonus
+    class RawBonus : public InformativeObject
     {
         public:
         friend class Characteristic;
@@ -16,8 +17,8 @@ namespace mechanics
         //########################################
         //##### Constructors and Conversions #####
         //########################################
-            RawBonus(float val, const string* des);
-            RawBonus(float val, const string des);
+            RawBonus(float val, const QString* des);
+            RawBonus(float val, const QString des);
             operator float() const;
             virtual ~RawBonus();
 
@@ -25,13 +26,14 @@ namespace mechanics
         //#####           Methods            #####
         //########################################
             void setValue(float newValue);
-            void setDescription(const string* newDes);
+            void setDescription(const QString *newDes);
             void setEnabled(bool ena);
 
         //########################################
         //#####          Accessors           #####
         //########################################
-            const string* getDescription() const;
+            virtual QString getToolTip() const;
+            virtual QString getName() const;
             float getValue() const;
             bool isEnabled() const;
             const vector<Characteristic*>* getCarateristics() const;
@@ -47,7 +49,7 @@ namespace mechanics
         //#####           Fields             #####
         //########################################
             float value;
-            string description;
+            QString description;
             bool enabled;
             vector<Characteristic*> chars;
 

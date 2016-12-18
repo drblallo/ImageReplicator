@@ -1,5 +1,7 @@
 #pragma once
+#include <mutex>
 
+using namespace std;
 namespace mechanics
 {
     class EngineModule
@@ -24,7 +26,12 @@ namespace mechanics
         //########################################
         //#####           Methods            #####
         //########################################
-            virtual void tick() = 0;
             bool blocked;
+            mutex executionMutex;
+            virtual void execute() = 0;
+
+        private:
+            void tick();
+
     };
 }

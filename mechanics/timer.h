@@ -22,10 +22,12 @@ namespace mechanics
         //########################################
 
         protected:
-            virtual void OnExpire() = 0;
+            virtual int OnExpire() = 0;
             virtual void OnTick();
-            virtual void execute();
             virtual ~Timer();
+
+        private:
+            virtual int execute();
 
         //########################################
         //#####           Fields             #####
@@ -36,3 +38,34 @@ namespace mechanics
 
     };
 }
+
+
+/*
+#pragma once
+#include "mechanics/timer.h"
+
+using namespace mechanics;
+
+namespace game
+{
+    class y
+    {
+        public:
+            y(int t) : Timer(t) {}
+
+        protected:
+            virtual void OnExpire();
+            virtual ~y();
+    };
+}
+
+using namespace game;
+
+y::~y(){}
+
+y::OnExpire()
+{
+
+}
+
+*/

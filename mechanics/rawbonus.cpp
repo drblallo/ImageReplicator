@@ -6,8 +6,8 @@ using namespace mechanics;
 //########################################
 //##### Constructors and Conversions #####
 //########################################
-RawBonus::RawBonus(float val, const string* des) : value(val), description(*des), enabled(true) {}
-RawBonus::RawBonus(float val, const string des) : value(val), description(des), enabled(true) {}
+RawBonus::RawBonus(float val, const QString* des) : InformativeObject(), value(val), description(*des), enabled(true) {}
+RawBonus::RawBonus(float val, const QString des) : InformativeObject(), value(val), description(des), enabled(true) {}
 
 
 RawBonus::operator float() const
@@ -29,7 +29,7 @@ void RawBonus::setValue(float newValue)
     value = newValue;
 }
 
-void RawBonus::setDescription(const string* newDes)
+void RawBonus::setDescription(const QString* newDes)
 {
     description = *newDes;
 }
@@ -42,9 +42,14 @@ void RawBonus::setEnabled(bool ena)
 //########################################
 //#####          Accessors           #####
 //########################################
-const string* RawBonus::getDescription() const
+QString RawBonus::getToolTip() const
 {
-    return &description;
+    return getName() + ": " + QString::number(getValue());
+}
+
+QString RawBonus::getName() const
+{
+    return description;
 }
 
 float RawBonus::getValue() const

@@ -7,7 +7,7 @@ using namespace mechanics;
 //########################################
 //##### Constructors and Conversions #####
 //########################################
-Characteristic::Characteristic(float base, string nm) :  chached(base), baseValue(base), name(nm) {}
+Characteristic::Characteristic(float base, QString nm) : InformativeObject(), chached(base), baseValue(base), name(nm) {}
 
 Characteristic::operator float() const
 {
@@ -23,7 +23,7 @@ Characteristic::~Characteristic()
         removeRawBonuss(multiplierExtraBonus[a]);
 }
 
-Characteristic::Characteristic(const Characteristic& toCopy) : baseValue(toCopy.baseValue), name(toCopy.name)
+Characteristic::Characteristic(const Characteristic& toCopy) : InformativeObject(), baseValue(toCopy.baseValue), name(toCopy.name)
 {
 
     for (unsigned int a = 0; a < toCopy.rawExtraBonus.size(); a++)
@@ -36,7 +36,7 @@ Characteristic::Characteristic(const Characteristic& toCopy) : baseValue(toCopy.
     }
 }
 
-Characteristic::Characteristic(const Characteristic* toCopy) : baseValue(toCopy->baseValue), name(toCopy->name)
+Characteristic::Characteristic(const Characteristic* toCopy) : InformativeObject(), baseValue(toCopy->baseValue), name(toCopy->name)
 {
     for (unsigned int a = 0; a < toCopy->rawExtraBonus.size(); a++)
     {
@@ -165,7 +165,29 @@ const vector<RawBonus*>* Characteristic::getMultiplierBonuses() const
     return &multiplierExtraBonus;
 }
 
-const string* Characteristic::getName() const
+QString Characteristic::getName() const
 {
-    return &name;
+    return name;
+}
+
+QString Characteristic::getToolTip() const
+{
+    QString str(getName() + ": " + QString::number(getValue()));
+    str.append('\n');
+    str.append('\n');
+    RawBonus* b(NULL);
+    for (unsigned int a = 0; a < rawExtraBonus.size(); a++)
+    {
+        b = rawExtraBonus[a];
+        str += b->getToolTip();
+        str.append("\n");
+    }
+
+    for (unsigned int a = 0; a < multiplierExtraBonus.size(); a++)
+    {
+        b = multiplierExtraBonus[a];
+        str += b->getToolTip();
+        str.append("%\n");
+    }
+    return str;
 }

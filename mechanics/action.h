@@ -1,11 +1,13 @@
 #pragma once
 #include <vector>
 #include <mutex>
+#include "informativeobject.h"
+#include <functional>
 
 using namespace std;
 namespace mechanics
 {
-    class Action
+    class Action : public InformativeObject
     {
         public:
         //########################################
@@ -34,9 +36,14 @@ namespace mechanics
                 return &pendingActions;
             }
             inline bool isPending()const {return pending;}
+            inline void addCallBack(std::function<void(int)> f){callbacks.push_back(f);}
+            virtual bool canBeCalled() const;
+            virtual bool canBeUncalled() const;
+            virtual QString getcannotUncallReason() const {return QString("can always be called");}
+            virtual QString getcannotCallReason() const {return QString("can always be uncalled");}
 
         protected:
-            virtual void execute() = 0;
+            virtual int execute() = 0;
             bool deleteMe;
             virtual ~Action();
 
@@ -50,6 +57,37 @@ namespace mechanics
             static mutex resolveAllMutex;
             static mutex allActionsMutex;
 
+            std::vector<std::function<void(int)> > callbacks;
             bool pending;
     };
 }
+
+/*
+#pragma once
+#include "mechanics/action.h"
+
+using namespace mechanics;
+
+namespace game
+{
+    class y
+    {
+        public:
+            y() : Action() {}
+
+        protected:
+            virtual void execute();
+            virtual ~y();
+    };
+}
+
+using namespace game;
+
+y::~y(){}
+
+y::execute()
+{
+
+}
+
+*/

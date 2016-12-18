@@ -8,6 +8,7 @@
 #include "action.h"
 
 using namespace mechanics;
+using namespace std;
 
 MechanicsEngine* MechanicsEngine::engine(NULL);
 bool MechanicsEngine::end(false);
@@ -45,7 +46,7 @@ void MechanicsEngine::loop()
         if (!t.hasExpired(minTickTime*1000))
         {
             int time((minTickTime*1000) - t.elapsed());
-            std::this_thread::sleep_for( std::chrono::milliseconds(time));
+            std::this_thread::sleep_for(std::chrono::milliseconds(time));
         }
     }
 }
@@ -56,7 +57,10 @@ void MechanicsEngine::tick()
     std::lock_guard<std::mutex> t(engineMutex);
     clearUnused();
     for (unsigned int a = 0; a < modules.size(); a++)
-        if (!modules[a]->blocked)
+        if (
+                (find(toRemove.begin(), toRemove.end(), modules[a]) == toRemove.end()) &&
+                !modules[a]->blocked
+           )
             modules[a]->tick();
     Action::resolveAllPending();
 }
