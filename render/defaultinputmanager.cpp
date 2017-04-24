@@ -3,13 +3,14 @@
 #include "device.h"
 #include "camera3d.h"
 #include "glwidget.h"
+#include <iostream>
 
 using namespace renderer;
 
 //########################################
 //##### Constructors and Conversions #####
 //########################################
-DefaultInputManager::DefaultInputManager()
+DefaultInputManager::DefaultInputManager() : EngineObject()
 {
 
 }
@@ -24,6 +25,7 @@ DefaultInputManager::~DefaultInputManager()
 //########################################
 void DefaultInputManager::Update()
 {
+
     Camera3D *m_camera(Device::getGraphicWindow()->getCamera());
     // Camera Transformation
     if (Input::buttonPressed(Qt::RightButton))

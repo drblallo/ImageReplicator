@@ -31,7 +31,7 @@ namespace renderer
             virtual bool hitted(const QVector3D*, const QVector3D*) const {return false;}
             static QOpenGLShaderProgram* getShader();
 
-        private:
+        protected:
         //########################################
         //#####         Accessors            #####
         //########################################

@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = meltingSuns
+TARGET = engine
 TEMPLATE = app
 
 
@@ -46,8 +46,9 @@ SOURCES += main.cpp\
     mechanics/Widgets/characteristicentitywidget.cpp \
     mechanics/Widgets/actionentitywidget.cpp \
     mechanics/Widgets/dialogentity.cpp \
-    render/map/region.cpp \
-    render/map/map.cpp
+    edgeDetection/algorithms.cpp \
+    appearinglines.cpp
+
 
 
 HEADERS  += mainwindow.h \
@@ -96,8 +97,9 @@ HEADERS  += mainwindow.h \
     mechanics/Widgets/characteristicentitywidget.h \
     mechanics/Widgets/actionentitywidget.h \
     mechanics/Widgets/dialogentity.h \
-    render/map/region.h \
-    render/map/map.h
+    edgeDetection/algorithms.h \
+    edgeDetection/kernels.h \
+    appearinglines.h
 
 FORMS    += mainwindow.ui \
     mechanics/Widgets/stockpileentitywidget.ui \
@@ -108,3 +110,4 @@ FORMS    += mainwindow.ui \
 RESOURCES += \
     resources.qrc
 
+CONFIG += c++14

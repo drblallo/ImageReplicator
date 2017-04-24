@@ -9,11 +9,13 @@ using namespace renderer;
 //########################################
 //##### Constructors and Conversions #####
 //########################################
-EngineObject::EngineObject()
+EngineObject::EngineObject() : active(true)
 {
     if (Device::getGraphicWindow())
+    {
         Device::getGraphicWindow()->engineObjects.push_back(this);
-    else
+        std::cerr << "attached" << "\n";
+    }else
         std::cerr << "failed to attach to module" << "\n";
 
 }

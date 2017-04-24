@@ -41,6 +41,7 @@ void GLWidget::initializeGL()
   //glCullFace(GL_BACK);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPointSize(1);
+  //resizeGL(111, 11111);
 
    logger = new QOpenGLDebugLogger(this);
 
@@ -50,6 +51,7 @@ void GLWidget::initializeGL()
 
 void GLWidget::update()
 {
+
   Input::update();
   makeCurrent();
   updateQueue.clear();
@@ -61,14 +63,8 @@ void GLWidget::update()
   if (scene)
     scene->update();
 
-
   for (unsigned int a = 0; a < updateQueue.size(); a++)
       updateQueue[a]->Update();
-  //for (int a = engineObjects.size()-1; a >= 0; a--)
-    //  if (engineObjects[a]->isActive())
-      //   engineObjects[a]->Update();
-
- // std::cout << updateQueue.size() <<"\n";
 
   GLenum error = GL_NO_ERROR;
   do {

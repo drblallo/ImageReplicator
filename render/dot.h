@@ -12,6 +12,11 @@ namespace renderer
             Dot(QVector3D p, QVector3D c) : pos(p), col(c){}
             Dot(QVector3D p) : pos(p), col(255, 255, 255){}
             Dot(float x, float y, float z) : pos(x, y, z), col(255, 255, 255){}
+            Dot& operator= ( const Dot & other )
+            {
+                pos = other.pos;
+                col = other.col;
+            }
 
         //########################################
         //#####           Fields             #####
