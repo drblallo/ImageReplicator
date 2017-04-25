@@ -2,6 +2,7 @@
 #include <vector>
 #include "render/dot.h"
 #include <QImage>
+#include "globaldefines.h"
 
 using namespace std;
 using namespace renderer;

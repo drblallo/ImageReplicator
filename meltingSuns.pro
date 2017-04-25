@@ -104,7 +104,8 @@ HEADERS  += mainwindow.h \
     appearinglines.h \
     globaldefines.h \
     utils.h \
-    imagereplicatorscene.h
+    imagereplicatorscene.h \
+    render/renderdefines.h
 
 FORMS    += mainwindow.ui \
     mechanics/Widgets/stockpileentitywidget.ui \

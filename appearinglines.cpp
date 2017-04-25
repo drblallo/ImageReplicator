@@ -1,5 +1,6 @@
 #include "appearinglines.h"
 #include "render/input.h"
+#include "globaldefines.h"
 
 AppearingLines::AppearingLines(std::vector<Dot> *d) : LinesObject(d), EngineObject()
 {
@@ -10,12 +11,16 @@ AppearingLines::AppearingLines(std::vector<Dot> *d) : LinesObject(d), EngineObje
 void AppearingLines::Update()
 {
     if (vCount < trueVCount)
-        vCount = vCount + (trueVCount/1000);
+        vCount = vCount + (trueVCount/GENERATION_DIVISOR);
     if (vCount > trueVCount)
         vCount = trueVCount;
 
     if (Input::keyPressed(Qt::Key_0))
     {
         vCount = 0;
+    }
+    if (Input::keyPressed(Qt::Key_1))
+    {
+        vCount = trueVCount;
     }
 }

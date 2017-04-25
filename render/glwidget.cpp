@@ -9,6 +9,7 @@
 #include <QOpenGLDebugLogger>
 #include "mainwindow.h"
 #include "render/scene.h"
+#include "renderdefines.h"
 
 using namespace renderer;
 GLWidget::GLWidget(QWidget* parent) : QOpenGLWidget(parent), scene(NULL), farPlane(1000)// doOne(false), count(0)
@@ -34,7 +35,7 @@ void GLWidget::initializeGL()
   setFocusPolicy(Qt::StrongFocus);
   installEventFilter(this);
 
-  glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
+  glClearColor(RED_CLEAR, GREEN_CLEAR, BLUE_CLEAR, ALPHA_CLEAR);
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
   glEnable(GL_CULL_FACE);

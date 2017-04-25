@@ -1,6 +1,5 @@
 #include "utils.h"
 #include <random>
-#include "globaldefines.h"
 
 void randomize(std::vector<renderer::Dot>* vec)
 {
