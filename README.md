@@ -1,2 +1,2 @@
-# MeltingSuns
-a QT5 engine and game
+# ImageReplicator
+simple edge detection combined to opengl
