@@ -8,75 +8,24 @@
 #include "edgeDetection/algorithms.h"
 #include <functional>
 #include <QImage>
-#include "render/dottedobject.h"
 #include "appearinglines.h"
-#include "render/defaultinputmanager.h"
 #include "render/defaultscene.h"
 #include <random>
 #include <algorithm>
-
-#define TRESH 20
-#define SCALA 7
-#define DROPPED 4
-
-std::default_random_engine generator;
-std::uniform_real_distribution<float> distributionReal(0, 1);
-
-void randomize(std::vector<renderer::Dot>* vec)
-{
-    int vCount = vec->size()/2;
-
-    std::uniform_int_distribution<int> distribution(0, vCount);
-    renderer::Dot d(QVector3D(0,0,0), QVector3D(0,0,0));
-
-    for (int a = 0; a < vCount; a++)
-    {
-        int target(distribution(generator));
-        d = (*vec)[target*2];
-        (*vec)[target*2] = (*vec)[a*2];
-        (*vec)[a*2] = d;
-
-        d = (*vec)[target*2+1];
-        (*vec)[target*2+1] = (*vec)[a*2+1];
-        (*vec)[a*2+1] = d;
-    }
-}
+#include "globaldefines.h"
+#include "utils.h"
+#include "imagereplicatorscene.h"
 
 
 int main(int argc, char *argv[])
 {
-    std::cerr << "started\n";
-    QImage sobelImage(roberts(QImage(QString("image.jpg"))));
+    QImage original(QString("image.jpg"));
+    //QImage sobelImage(roberts(original));
+    QImage sobelImage(sobel(original));
+    //QImage sobelImage(canny(original, 0.5f,0.5f, 0.5f));
+
     std::vector<renderer::Dot> ls;
-    for (int a = 0; a < sobelImage.height(); a++)
-    {
-        QRgb* line((QRgb*)(sobelImage.scanLine(a)));
-
-        for (int b = 0; b < sobelImage.width(); b++)
-        {
-            QColor col(qRed(line[b]), qGreen(line[b]), qBlue(line[b]));
-            if (col.red() > TRESH || col.green() > TRESH || col.blue() > TRESH)
-            {
-                ls.push_back(renderer::Dot(
-                                 QVector3D(1*b, -1*a, -10),
-                                 QVector3D(col.red(), col.green(), col.blue())
-                                 )
-                             );
-
-                ls.push_back(renderer::Dot(
-                                 QVector3D(1*b + (SCALA*distributionReal(generator)), -1*a + (SCALA*distributionReal(generator)), -10),
-                                 QVector3D(col.red(), col.green(), col.blue())
-                                 )
-                             );
-            }
-        }
-    }
-
-    randomize(&ls);
-
-    ls.erase(ls.begin()+ls.size()/DROPPED, ls.end());
-
-    std::cerr << "created\n";
+    generateLines(&ls, &original, &sobelImage);
 
     mechanics::MechanicsEngine::StartEngine();
 
@@ -89,34 +38,12 @@ int main(int argc, char *argv[])
     format.setSamples(2);
     format.setOption(QSurfaceFormat::DebugContext);
     format.setSwapInterval(-1);
-
     QSurfaceFormat::setDefaultFormat(format);
 
-
     MainWindow w;
-    w.resize(1366, 768);
+    w.resize(a.desktop()->size().width(), a.desktop()->size().height());
     w.show();
 
-    renderer::DefaultScene scene;
-    renderer::DefaultInputManager man;
-
-    AppearingLines ogg(&ls);
-
-    float divisor(0);
-
-    if (w.width() > w.height())
-        divisor = w.width();
-    else
-        divisor = w.height();
-
-    divisor = 10/divisor;
-
-    ogg.getTransform()->setScale(divisor, divisor, 1);
-    ogg.getTransform()->setTranslation(QVector3D(
-                                           float(ogg.getTransform()->scale().x())/-2.0f*sobelImage.width(),
-                                           float(ogg.getTransform()->scale().y())/2.0f*sobelImage.height(),
-                                           0)
-                                       );
-
+    ImageReplicatorScene scene(&original, &sobelImage, &ls);
     return a.exec();
 }

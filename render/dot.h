@@ -16,6 +16,7 @@ namespace renderer
             {
                 pos = other.pos;
                 col = other.col;
+                return *this;
             }
 
         //########################################

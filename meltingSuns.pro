@@ -47,7 +47,9 @@ SOURCES += main.cpp\
     mechanics/Widgets/actionentitywidget.cpp \
     mechanics/Widgets/dialogentity.cpp \
     edgeDetection/algorithms.cpp \
-    appearinglines.cpp
+    appearinglines.cpp \
+    utils.cpp \
+    imagereplicatorscene.cpp
 
 
 
@@ -99,7 +101,10 @@ HEADERS  += mainwindow.h \
     mechanics/Widgets/dialogentity.h \
     edgeDetection/algorithms.h \
     edgeDetection/kernels.h \
-    appearinglines.h
+    appearinglines.h \
+    globaldefines.h \
+    utils.h \
+    imagereplicatorscene.h
 
 FORMS    += mainwindow.ui \
     mechanics/Widgets/stockpileentitywidget.ui \
