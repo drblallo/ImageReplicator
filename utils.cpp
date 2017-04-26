@@ -26,12 +26,12 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
     std::default_random_engine generator;
     std::uniform_real_distribution<float> distributionReal(0, 1);
 
-    for (int a = 0; a < sobelImage->height(); a++)
+    for (int a = 1; a < sobelImage->height()-1; a++)
     {
         QRgb* line((QRgb*)(sobelImage->scanLine(a)));
         QRgb* lc((QRgb*)(original->scanLine(a)));
 
-        for (int b = 0; b < sobelImage->width(); b++)
+        for (int b = 1; b < sobelImage->width()-1; b++)
         {
             QColor col(qRed(line[b]), qGreen(line[b]), qBlue(line[b]));
             QColor originCol(qRed(lc[b]), qGreen(lc[b]), qBlue(lc[b]));
@@ -45,8 +45,6 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
                 ls->push_back(v.x());
                 ls->push_back(v.y());
                 ls->push_back(v.z());
-                //ls->push_back(((a*sobelImage->width()+b))*2);
-                //ls->push_back((ls->size()-6)/7);
                 ls->push_back(0);
 
 
@@ -57,7 +55,6 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
                 ls->push_back(v.y());
                 ls->push_back(v.z());
                 ls->push_back((ls->size()-13)/7);
-                //ls->push_back(0);
             }
         }
     }
@@ -69,12 +66,5 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
         t--;
     }
     ls->erase(ls->begin()+t, ls->end());
-
-
-    /*int num(ls->size());
-    for (int a = 0; a < num; a = a + 6)
-    {
-
-    }*/
 
 }

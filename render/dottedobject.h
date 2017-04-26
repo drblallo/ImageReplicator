@@ -17,6 +17,7 @@ namespace renderer
         //########################################
             DottedObject(const std::vector<Dot>* dots);
             DottedObject(const std::vector<Dot>* dots, QOpenGLShaderProgram* program);
+            DottedObject(QOpenGLShaderProgram* program);
             DottedObject(const std::vector<float>* dots, QOpenGLShaderProgram* program, int vertexCount);
             virtual ~DottedObject();
 

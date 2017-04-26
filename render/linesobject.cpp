@@ -11,6 +11,11 @@ LinesObject::LinesObject(std::vector<Dot>* lines, QOpenGLShaderProgram *program)
 
 }
 
+LinesObject::LinesObject(QOpenGLShaderProgram *program) : DottedObject(program)
+{
+
+}
+
 LinesObject::LinesObject(std::vector<float>* lines, QOpenGLShaderProgram *program, int vertexCount) : DottedObject(lines, program, vertexCount)
 {
 

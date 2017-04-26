@@ -15,11 +15,18 @@
 #include "globaldefines.h"
 #include "utils.h"
 #include "imagereplicatorscene.h"
+#include "parser/parser.h"
 
 
 int main(int argc, char *argv[])
 {
-    QImage original(QString(FILE_NAME));
+	string parserFile(PARSER_FILE);
+	parser::FileParser parser(&parserFile);
+
+	string fileName(FILE_NAME);
+	fileName = parser.getValue(fileName.c_str(), fileName.size());
+	QString imageName(QString::fromStdString(fileName));
+    QImage original(imageName);
     //QImage sobelImage(roberts(original));
     QImage sobelImage(sobel(original));
     //QImage sobelImage(scharr(original));
@@ -34,7 +41,7 @@ int main(int argc, char *argv[])
     QSurfaceFormat format;
     format.setRenderableType(QSurfaceFormat::OpenGL);
     format.setProfile(QSurfaceFormat::CoreProfile);
-    format.setVersion(3,3);
+    format.setVersion(4,1);
     format.setDepthBufferSize(a.desktop()->depth());
     format.setSamples(2);
     format.setOption(QSurfaceFormat::DebugContext);

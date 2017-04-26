@@ -23,7 +23,7 @@ QOpenGLShaderProgram* getProgram()
     return s;
 }
 
-AppearingLines::AppearingLines(std::vector<float> *d) : LinesObject(NULL, getProgram(), 0), EngineObject()
+AppearingLines::AppearingLines(std::vector<float> *d) : LinesObject(getProgram()), EngineObject()
 {
     d->push_back(0);
     d->push_back(0);
@@ -31,11 +31,10 @@ AppearingLines::AppearingLines(std::vector<float> *d) : LinesObject(NULL, getPro
     std::cerr << d->size() << "\n";
     setDots(d, (d->size()-3)/7);
 
-    if (!getProgram())
-        std::cerr << "wtf\n";
     trueVCount = getVertexCount();
     vCount = 0;
     timeElapsed = 0;
+
     if (!shader)
         std::cerr << "no shader\n";
     shader->bind();
@@ -48,7 +47,6 @@ AppearingLines::AppearingLines(std::vector<float> *d) : LinesObject(NULL, getPro
     renderState.blending.setSourceAlphaFactor(SourceBlendingSourceAlpha);
     renderState.depthMask = false;
 
-    canBeDrawn = true;
 }
 
 void AppearingLines::Update()

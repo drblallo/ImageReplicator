@@ -47,6 +47,7 @@ SOURCES += main.cpp\
     mechanics/Widgets/actionentitywidget.cpp \
     mechanics/Widgets/dialogentity.cpp \
     edgeDetection/algorithms.cpp \
+	parser/parser.cpp \ 
     appearinglines.cpp \
     utils.cpp \
     imagereplicatorscene.cpp \
@@ -101,6 +102,7 @@ HEADERS  += mainwindow.h \
     mechanics/Widgets/dialogentity.h \
     edgeDetection/algorithms.h \
     edgeDetection/kernels.h \
+	parser/parser.h \
     appearinglines.h \
     globaldefines.h \
     utils.h \
