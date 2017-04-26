@@ -7,5 +7,5 @@
 using namespace std;
 using namespace renderer;
 
-void randomize(vector<Dot>* vec);
-void generateLines(vector<Dot>* ls, QImage* original, QImage* sobelImage);
+void randomize(std::vector<float> *vec);
+void generateLines(vector<float> *ls, QImage* original, QImage* sobelImage);

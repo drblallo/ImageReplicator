@@ -5,7 +5,7 @@
 using namespace renderer;
 std::string DottedObject::vertString(":/shaders/simple.vert");
 std::string DottedObject::fragString(":/shaders/simple.frag");
-QOpenGLShaderProgram* DottedObject::shader(NULL);
+QOpenGLShaderProgram* DottedObject::pshader(NULL);
 
 //########################################
 //##### Constructors and Conversions #####
@@ -22,6 +22,32 @@ DottedObject::DottedObject(const std::vector<Dot> *dots) : RenderObject(getShade
     canBeDrawn = true;
 }
 
+DottedObject::DottedObject(const std::vector<Dot>* dots, QOpenGLShaderProgram* program) : RenderObject(program)
+{
+    if (!dots)
+    {
+        std::cout << "no points to spawn\n";
+        return;
+    }
+    if (dots->size() > 0)
+        setDots(dots);
+    canBeDrawn = true;
+
+}
+
+DottedObject::DottedObject(const std::vector<float>* dots, QOpenGLShaderProgram* program, int vertexCount) : RenderObject(program)
+{
+    if (!dots)
+    {
+        std::cout << "no points to spawn\n";
+        return;
+    }
+    if (dots->size() > 0)
+        setDots(dots, vertexCount);
+    canBeDrawn = true;
+
+}
+
 DottedObject::~DottedObject()
 {
 
@@ -33,8 +59,16 @@ DottedObject::~DottedObject()
 void DottedObject::setDots(const std::vector<Dot> *dots)
 {
     std::cout << "setting up a dotted object of " << dots->size() << "\n";
-    RenderObject::setBuffer(&(dots->at(0)), dots->size() * sizeof(Dot));
     vCount = dots->size();
+    setBuffer(&(dots->at(0)), dots->size() * sizeof(Dot));
+    //std::cout << dots->size() << "\n";
+}
+
+void DottedObject::setDots(const std::vector<float> *dots, int dotCount)
+{
+    std::cout << "setting up a dotted object with " << dotCount << " vertex\n";
+    vCount = dotCount;
+    setBuffer(&(dots->at(0)), dots->size() * sizeof(float));
     //std::cout << dots->size() << "\n";
 }
 
@@ -45,9 +79,9 @@ GLenum DottedObject::getRenderMode() const
 
 QOpenGLShaderProgram* DottedObject::getShader()
 {
-    if (!shader)
+    if (!pshader)
     {
-        shader = Device::createProgram(&vertString, &fragString);
+        pshader = Device::createProgram(&vertString, &fragString);
     }
-    return shader;
+    return pshader;
 }

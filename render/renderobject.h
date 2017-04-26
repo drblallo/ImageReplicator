@@ -68,7 +68,7 @@ namespace renderer
         //#####           Methods            #####
         //########################################
             virtual void setBuffer(const std::vector<QVector3D>* list);
-            virtual void setBuffer(const void*, int size);
+            virtual void setBuffer(const void* pos, int size);
             virtual bool hitted(const QVector3D* source, const QVector3D* direction) const = 0;
             inline const QOpenGLShaderProgram* getShader() const {return shader;}
             virtual GLenum getRenderMode() const = 0;

@@ -16,6 +16,8 @@ namespace renderer
         //##### Constructors and Conversions #####
         //########################################
             DottedObject(const std::vector<Dot>* dots);
+            DottedObject(const std::vector<Dot>* dots, QOpenGLShaderProgram* program);
+            DottedObject(const std::vector<float>* dots, QOpenGLShaderProgram* program, int vertexCount);
             virtual ~DottedObject();
 
         //########################################
@@ -27,7 +29,8 @@ namespace renderer
         //########################################
         //#####           Methods            #####
         //########################################
-            void setDots(const std::vector<Dot>* dots);
+            void setDots(const std::vector<Dot>* dot);
+            void setDots(const std::vector<float>* dots, int dotCount);
             virtual bool hitted(const QVector3D*, const QVector3D*) const {return false;}
             static QOpenGLShaderProgram* getShader();
 
@@ -37,14 +40,16 @@ namespace renderer
         //########################################
             virtual GLenum getRenderMode() const ;
             virtual int getVertexCount()const {return vCount;}
-            static QOpenGLShaderProgram* shader;
+            int vCount;
+
+        private:
+            static QOpenGLShaderProgram* pshader;
 
         //########################################
         //#####           Fields             #####
         //########################################
             static std::string vertString;
             static std::string fragString;
-            int vCount;
 
     };
 }

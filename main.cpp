@@ -19,13 +19,13 @@
 
 int main(int argc, char *argv[])
 {
-    QImage original(QString("image.jpg"));
+    QImage original(QString(FILE_NAME));
     //QImage sobelImage(roberts(original));
     QImage sobelImage(sobel(original));
     //QImage sobelImage(scharr(original));
     //QImage sobelImage(canny(original, 0.5f,0.5f, 0.5f));
 
-    std::vector<renderer::Dot> ls;
+    std::vector<float> ls;
     generateLines(&ls, &original, &sobelImage);
 
     mechanics::MechanicsEngine::StartEngine();

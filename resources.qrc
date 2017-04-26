@@ -5,5 +5,6 @@
         <file>texture/nebula.png</file>
         <file>shaders/simpleTex.frag</file>
         <file>shaders/simpleTex.vert</file>
+        <file>shaders/appearinglines.vert</file>
     </qresource>
 </RCC>

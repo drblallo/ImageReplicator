@@ -49,7 +49,7 @@ SOURCES += main.cpp\
     edgeDetection/algorithms.cpp \
     appearinglines.cpp \
     utils.cpp \
-    imagereplicatorscene.cpp
+    imagereplicatorscene.cpp \
 
 
 
@@ -117,3 +117,6 @@ RESOURCES += \
     resources.qrc
 
 CONFIG += c++14
+
+DISTFILES += \
+    shaders/appearinglines.vert

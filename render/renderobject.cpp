@@ -84,6 +84,7 @@ void RenderObject::setBuffer(const std::vector<QVector3D>* list)
 }
 void RenderObject::setBuffer(const void * pos, int size)
 {
+    std::cerr << "called render object set buffer\n";
     shader->bind();
     buffer.bind();
     AO.bind();

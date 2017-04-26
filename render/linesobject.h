@@ -7,6 +7,8 @@ namespace renderer
     {
         public:
             LinesObject(std::vector<Dot>* lines);
+            LinesObject(std::vector<float> *lines, QOpenGLShaderProgram* program, int vertexCount);
+            LinesObject(std::vector<Dot> *lines, QOpenGLShaderProgram* program);
             virtual ~LinesObject();
 
         protected:
