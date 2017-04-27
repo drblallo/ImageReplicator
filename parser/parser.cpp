@@ -4,19 +4,40 @@
 
 using namespace parser;
 
-FileParser::FileParser(const string* propertyName) : readValues()
+void createFile(const string* propertyName, const string* defaultFile)
+{
+	ofstream file(propertyName->c_str());
+	if (!file)
+		return;
+
+	file << *defaultFile << std::endl;
+	file.close();
+}
+
+FileParser::FileParser(const string* propertyName, const string* defaultFile) : readValues()
 {
 	fstream fs;
+	fstream f2;
 	string l;
+	fstream* p(&fs);
 	
 	fs.open(propertyName->c_str(), fstream::in);	
 	if (!fs.good())
 	{
+		fs.close();
 		cerr << *propertyName << " file does not exist\n";
-		return;
+		createFile(propertyName, defaultFile);
+
+		f2.open(propertyName->c_str(), fstream::in);
+		if (!f2.good())
+		{
+			cerr << "and could not be created\n";
+			return;
+		}
+		p = &f2;
 	}
 	
-	getline(fs, l);
+	getline(*p, l);
 	while (l.size() > 0)
 	{
 
@@ -27,9 +48,9 @@ FileParser::FileParser(const string* propertyName) : readValues()
 		readValues.push_back(l.substr(0, a));
 		readValues.push_back(l.substr(a+1, l.size()));
 
-		getline(fs, l);
+		getline(*p, l);
 	}
-	fs.close();
+	p->close();
 
 }
 

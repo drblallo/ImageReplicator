@@ -9,7 +9,8 @@ GlobalSettings* GlobalSettings::getSettings()
 	if (!settings)
 	{
 		string s(PARSER_FILE);
-		parser::FileParser parser(&s);
+		string d(DEFAULT_FILE);
+		parser::FileParser parser(&s, &d);
 		settings = new GlobalSettings(&parser);
 		
 	}
