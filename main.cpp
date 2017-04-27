@@ -15,17 +15,13 @@
 #include "globaldefines.h"
 #include "utils.h"
 #include "imagereplicatorscene.h"
-#include "parser/parser.h"
-
+#include "globalsettings.h"
+#include "ui_mainwindow.h"
 
 int main(int argc, char *argv[])
 {
-	string parserFile(PARSER_FILE);
-	parser::FileParser parser(&parserFile);
-
-	string fileName(FILE_NAME);
-	fileName = parser.getValue(fileName.c_str(), fileName.size());
-	QString imageName(QString::fromStdString(fileName));
+	GlobalSettings* settings(GlobalSettings::getSettings());
+	QString imageName(QString::fromStdString(settings->file_name));
     QImage original(imageName);
     //QImage sobelImage(roberts(original));
     QImage sobelImage(sobel(original));
@@ -50,7 +46,9 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.resize(a.desktop()->size().width(), a.desktop()->size().height());
+	QVector4D v(settings->red_clear, settings->green_clear, settings->blue_clear, settings->alpha_clear);
     w.show();
+	w.getUI()->openGLWidget->setClearColor(v);
 
     ImageReplicatorScene scene(&original, &sobelImage, &ls);
     return a.exec();

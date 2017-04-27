@@ -3,17 +3,14 @@
 #define SCALEY 8.0f
 #define SCALEX 2*SCALEY
 
-#define TRESH 50
-#define SCALA 3
-#define DROPPED 1
-#define DEPTH 0.4f
-
-#define GENERATION_DIVISOR 1000
-
-#define RED_CLEAR 0.05f
-#define GREEN_CLEAR 0.05f
-#define BLUE_CLEAR 0.1f
-#define ALPHA_CLEAR 0.0f
-
 #define FILE_NAME "file_name"
-#define PARSER_FILE "settings.txt"
+#define PARSER_FILE "setting.txt"
+#define TRESH_STRING "tresh"
+#define SCALA_STRING "scala"
+#define DROPPED_STRING "dropped"
+#define DEPTH_STRING "depth"
+#define GENERATION_DIVISOR_STRING "generation_divisor"
+#define RED_CLEAR_STRING "red_clear" 
+#define GREEN_CLEAR_STRING "green_clear" 
+#define BLUE_CLEAR_STRING "blue_clear" 
+#define ALPHA_CLEAR_STRING "alpha_clear" 

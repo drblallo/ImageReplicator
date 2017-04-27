@@ -37,6 +37,7 @@ class GLWidget : public QOpenGLWidget, protected QOpenGLFunctions
         void resizeGL(int width, int height);
         void paintGL();
         void teardownGL();
+		void setClearColor(QVector4D color);
 
     //########################################
     //#####         Accessors            #####

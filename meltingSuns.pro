@@ -51,6 +51,7 @@ SOURCES += main.cpp\
     appearinglines.cpp \
     utils.cpp \
     imagereplicatorscene.cpp \
+	globalsettings.cpp \
 
 
 
@@ -107,7 +108,8 @@ HEADERS  += mainwindow.h \
     globaldefines.h \
     utils.h \
     imagereplicatorscene.h \
-    render/renderdefines.h
+    render/renderdefines.h \
+	globalsettings.h \
 
 FORMS    += mainwindow.ui \
     mechanics/Widgets/stockpileentitywidget.ui \

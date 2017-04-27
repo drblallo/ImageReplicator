@@ -35,7 +35,7 @@ void GLWidget::initializeGL()
   setFocusPolicy(Qt::StrongFocus);
   installEventFilter(this);
 
-  glClearColor(RED_CLEAR, GREEN_CLEAR, BLUE_CLEAR, ALPHA_CLEAR);
+  glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
   glEnable(GL_CULL_FACE);
@@ -48,6 +48,12 @@ void GLWidget::initializeGL()
 
   logger->initialize(); // initializes in the current context, i.e. ctx
 
+}
+
+void GLWidget::setClearColor(QVector4D color)
+{
+	makeCurrent();
+	glClearColor(color.x(), color.y(), color.z(), color.w());
 }
 
 void GLWidget::update()

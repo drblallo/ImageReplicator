@@ -1,6 +1,7 @@
 #include "appearinglines.h"
 #include "render/input.h"
 #include "globaldefines.h"
+#include "globalsettings.h"
 #include "render/device.h"
 #include <string>
 #include <QOpenGLShaderProgram>
@@ -51,8 +52,9 @@ AppearingLines::AppearingLines(std::vector<float> *d) : LinesObject(getProgram()
 
 void AppearingLines::Update()
 {
-    vCount = vCount + (trueVCount/GENERATION_DIVISOR);
-    timeElapsed  += (trueVCount/GENERATION_DIVISOR);
+	int divisor(GlobalSettings::getSettings()->generatorion_divisor);
+    vCount = vCount + (trueVCount/divisor);
+    timeElapsed  += (trueVCount/divisor);
     if (vCount > trueVCount)
     {
         vCount = trueVCount;

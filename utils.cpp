@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <random>
+#include "globalsettings.h"
 
 void randomize(std::vector<float>* vec)
 {
@@ -23,6 +24,12 @@ void randomize(std::vector<float>* vec)
 
 void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
 {
+	GlobalSettings* settings(GlobalSettings::getSettings());
+	int treshHold(settings->treshHold);
+	int scale(settings->scala);
+	int dropped(settings->dropped);
+	float depth(settings->depth);
+
     std::default_random_engine generator;
     std::uniform_real_distribution<float> distributionReal(0, 1);
 
@@ -36,12 +43,12 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
             QColor col(qRed(line[b]), qGreen(line[b]), qBlue(line[b]));
             QColor originCol(qRed(lc[b]), qGreen(lc[b]), qBlue(lc[b]));
 
-            if (col.red() > TRESH || col.green() > TRESH || col.blue() > TRESH)
+            if (col.red() > treshHold || col.green() > treshHold || col.blue() > treshHold)
             {
                 QVector3D v(float(originCol.red())/255.0f, float(originCol.green())/255.0f, float(originCol.blue())/255.0f);
-                ls->push_back(1*b + (SCALA*distributionReal(generator)));
-                ls->push_back(-1*a + (SCALA*distributionReal(generator)));
-                ls->push_back(-10.0f - ((distributionReal(generator))*DEPTH));
+                ls->push_back(1*b + (scale * distributionReal(generator)));
+                ls->push_back(-1*a + (scale * distributionReal(generator)));
+                ls->push_back(-10.0f - ((distributionReal(generator)) * depth));
                 ls->push_back(v.x());
                 ls->push_back(v.y());
                 ls->push_back(v.z());
@@ -60,7 +67,7 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
     }
 
     randomize(ls);
-    int t(ls->size()/DROPPED);
+    int t(ls->size()/dropped);
     while (t%7!=0)
     {
         t--;
@@ -68,3 +75,4 @@ void generateLines(vector<float>* ls, QImage* original, QImage* sobelImage)
     ls->erase(ls->begin()+t, ls->end());
 
 }
+
