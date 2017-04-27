@@ -8,7 +8,7 @@ using namespace std;
 class ImageReplicatorScene : DefaultScene
 {
     public:
-        ImageReplicatorScene(QImage* original, QImage* sobel, vector<float>* ls);
+        ImageReplicatorScene(QImage* original, QImage* sobel);
 
     private:
         QImage* originalImage;

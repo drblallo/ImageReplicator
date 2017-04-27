@@ -1,13 +1,16 @@
 #pragma once
 #include "render/linesobject.h"
 #include "render/engineobject.h"
+#include <QImage>
 
 using namespace renderer;
 class AppearingLines : public LinesObject, public EngineObject
 {
 public:
     AppearingLines(std::vector<float> *d);
+    AppearingLines(QImage* image, QImage* original);
     void Update();
+	static int structSize;
 
 private:
     int trueVCount;

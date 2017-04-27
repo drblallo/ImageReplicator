@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     //QImage sobelImage(scharr(original));
     //QImage sobelImage(canny(original, 0.5f,0.5f, 0.5f));
 
-    std::vector<float> ls;
-    generateLines(&ls, &original, &sobelImage);
+  //  std::vector<float> ls;
+  //  generateLines(&ls, &original, &sobelImage);
 
     mechanics::MechanicsEngine::StartEngine();
 
@@ -50,6 +50,6 @@ int main(int argc, char *argv[])
     w.show();
 	w.getUI()->openGLWidget->setClearColor(v);
 
-    ImageReplicatorScene scene(&original, &sobelImage, &ls);
+    ImageReplicatorScene scene(&original, &sobelImage);
     return a.exec();
 }

@@ -18,6 +18,7 @@ class GlobalSettings
 		float green_clear;
 		float blue_clear;
 		float alpha_clear;
+		int black_and_white;
 		std::string file_name;
 
 	private:

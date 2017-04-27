@@ -53,4 +53,7 @@ GlobalSettings::GlobalSettings(parser::FileParser* parser)
 
 	t = ALPHA_CLEAR_STRING;
 	alpha_clear = std::stof(parser->getValue(&t));
+
+	t = BLACK_AND_WHITE_STRING;
+	black_and_white = std::stof(parser->getValue(&t));
 }

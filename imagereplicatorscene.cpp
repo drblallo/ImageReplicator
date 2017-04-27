@@ -2,11 +2,11 @@
 #include "globaldefines.h"
 #include <cmath>
 
-ImageReplicatorScene::ImageReplicatorScene(QImage *original, QImage *sobel, vector<float> *ls) :
+ImageReplicatorScene::ImageReplicatorScene(QImage *original, QImage *sobel) :
     DefaultScene(),
     originalImage(original),
     sobelImage(sobel),
-    ogg(ls)
+	ogg(sobel, original)
 {
 
     float divisor(min(SCALEX/sobelImage->width(), SCALEY/sobelImage->height()));

@@ -22,7 +22,11 @@ DottedObject::DottedObject(const std::vector<Dot> *dots) : RenderObject(getShade
     canBeDrawn = true;
 }
 
-DottedObject::DottedObject(const std::vector<Dot>* dots, QOpenGLShaderProgram* program) : RenderObject(program)
+DottedObject::DottedObject
+	(
+		const std::vector<Dot>* dots,
+	   	QOpenGLShaderProgram* program
+	) : RenderObject(program)
 {
     if (!dots)
     {
@@ -40,7 +44,12 @@ DottedObject::DottedObject(QOpenGLShaderProgram* program) : RenderObject(program
     canBeDrawn = true;
 }
 
-DottedObject::DottedObject(const std::vector<float>* dots, QOpenGLShaderProgram* program, int vertexCount) : RenderObject(program)
+DottedObject::DottedObject
+	(
+		const std::vector<float>* dots,
+	   	QOpenGLShaderProgram* program,
+	   	int vertexCount
+	) : RenderObject(program)
 {
     if (!dots)
     {
