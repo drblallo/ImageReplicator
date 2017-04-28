@@ -113,16 +113,29 @@ void GLWidget::paintGL()
 
 }
 
+bool distanceFunction(RenderObject* ogg, RenderObject* ogg2)
+{
+	QVector3D cameraPos(Device::getGraphicWindow()->getCamera()->translation());
+	float d(ogg->getTransform()->translation().distanceToPoint(cameraPos));
+	return (d > ogg2->getTransform()->translation().distanceToPoint(cameraPos));
+}
+
 void GLWidget::sortRenderObjects()
 {
+	//move trasparent object to the bottom
+	int target(renderObjects.size()-1);
     for (int a = renderObjects.size()-1; a >= 0; a--)
     {
         if (!renderObjects[a]->getState()->depthMask)
         {
-            renderObjects.push_back(renderObjects[a]);
-            renderObjects.erase(renderObjects.begin() + a);
+			std::swap(renderObjects[a], renderObjects[target]);
+			target--;
         }
     }
+
+	//sort by distance trasparent object
+	std::sort(renderObjects.begin() + target + 1, renderObjects.end(), distanceFunction);
+	
 }
 
 void GLWidget::applyRenderState(const RenderState *state)

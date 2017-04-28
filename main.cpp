@@ -21,15 +21,14 @@
 int main(int argc, char *argv[])
 {
 	GlobalSettings* settings(GlobalSettings::getSettings());
+
 	QString imageName(QString::fromStdString(settings->file_name));
     QImage original(imageName);
+
     //QImage sobelImage(roberts(original));
     QImage sobelImage(sobel(original));
     //QImage sobelImage(scharr(original));
     //QImage sobelImage(canny(original, 0.5f,0.5f, 0.5f));
-
-  //  std::vector<float> ls;
-  //  generateLines(&ls, &original, &sobelImage);
 
     mechanics::MechanicsEngine::StartEngine();
 
@@ -46,10 +45,15 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.resize(a.desktop()->size().width(), a.desktop()->size().height());
-	QVector4D v(settings->red_clear, settings->green_clear, settings->blue_clear, settings->alpha_clear);
     w.show();
+	QVector4D v(
+			settings->red_clear,
+		   	settings->green_clear,
+		   	settings->blue_clear,
+		   	settings->alpha_clear
+			);
 	w.getUI()->openGLWidget->setClearColor(v);
 
-    ImageReplicatorScene scene(&original, &sobelImage);
+    ImageReplicatorScene scene(&original, &sobelImage, settings->blot_enabled != 0);
     return a.exec();
 }

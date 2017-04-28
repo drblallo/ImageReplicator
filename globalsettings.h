@@ -19,6 +19,10 @@ class GlobalSettings
 		float blue_clear;
 		float alpha_clear;
 		int black_and_white;
+		int blot_quantity;
+		float blot_scale_x;
+		float blot_scale_y;
+		int blot_enabled;
 		std::string file_name;
 
 	private:

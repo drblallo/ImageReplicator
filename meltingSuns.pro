@@ -52,6 +52,7 @@ SOURCES += main.cpp\
     utils.cpp \
     imagereplicatorscene.cpp \
 	globalsettings.cpp \
+	blotobject.cpp \
 
 
 
@@ -110,6 +111,7 @@ HEADERS  += mainwindow.h \
     imagereplicatorscene.h \
     render/renderdefines.h \
 	globalsettings.h \
+	blotobject.h \
 
 FORMS    += mainwindow.ui \
     mechanics/Widgets/stockpileentitywidget.ui \
